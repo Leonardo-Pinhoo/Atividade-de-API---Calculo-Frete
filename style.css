@@ -1,0 +1,317 @@
+:root {
+  --bg: #f4f1ea;
+  --surface: #fbfaf6;
+  --ink: #1d1b17;
+  --ink-soft: #5c574d;
+  --ink-mute: #8b857a;
+  --line: #d9d3c6;
+  --line-strong: #b9b1a0;
+  --accent: #c2541f;
+  --accent-ink: #9a3f12;
+  --danger: #b3261e;
+  --radius: 6px;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #171613;
+    --surface: #201e1a;
+    --ink: #ede8dd;
+    --ink-soft: #b3ac9e;
+    --ink-mute: #7f7869;
+    --line: #35322b;
+    --line-strong: #4b473d;
+    --accent: #e0703a;
+    --accent-ink: #f0996d;
+    --danger: #f28b82;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 32px 20px 48px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main { flex: 1; }
+
+/* Topo */
+
+.topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line-strong);
+  margin-bottom: 48px;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+
+.brand-dot { color: var(--accent); }
+
+.origin {
+  font-size: 13px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.origin-label {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 1px 6px;
+  border: 1px solid var(--line-strong);
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+/* Intro */
+
+.intro { margin-bottom: 32px; }
+
+h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 8vw, 56px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+}
+
+.intro p {
+  margin: 0;
+  max-width: 44ch;
+  color: var(--ink-soft);
+}
+
+/* Formulário */
+
+.freight-form label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+}
+
+.field-row {
+  display: flex;
+  gap: 8px;
+}
+
+input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  font-size: 17px;
+  letter-spacing: 0.04em;
+  padding: 12px 14px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+input::placeholder { color: var(--ink-mute); letter-spacing: 0.04em; }
+
+input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.freight-form.is-invalid input {
+  border-color: var(--danger);
+}
+
+.freight-form.is-invalid input:focus {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 22%, transparent);
+}
+
+button {
+  font: inherit;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 12px 20px;
+  color: #fff;
+  background: var(--accent);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 120ms ease, transform 80ms ease;
+}
+
+button:hover { background: var(--accent-ink); }
+button:active { transform: translateY(1px); }
+
+button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  cursor: progress;
+  background: var(--ink-mute);
+}
+
+.message {
+  min-height: 1.5em;
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: var(--danger);
+}
+
+.message:empty { display: none; }
+
+/* Resultado — etiqueta de remessa */
+
+.ticket {
+  margin-top: 40px;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  animation: ticket-in 220ms ease-out;
+}
+
+@keyframes ticket-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.ticket-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px dashed var(--line-strong);
+}
+
+.ticket-head h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: -0.01em;
+}
+
+.ticket-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.ticket-body {
+  margin: 0;
+  padding: 8px 20px;
+}
+
+.ticket-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.ticket-row:last-child { border-bottom: 0; }
+
+.ticket-row dt {
+  font-size: 13px;
+  color: var(--ink-mute);
+}
+
+.ticket-row dd {
+  margin: 0;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.ticket-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  border-top: 1px dashed var(--line-strong);
+}
+
+.ticket-total-label {
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.ticket-total-value {
+  font-family: var(--font-display);
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.ticket-note {
+  display: block;
+  padding: 0 20px 16px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink-mute);
+}
+
+/* Rodapé */
+
+.foot {
+  margin-top: 56px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--ink-mute);
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+  .page { padding-top: 24px; }
+  .topbar { margin-bottom: 36px; }
+  .field-row { flex-direction: column; }
+  button { width: 100%; }
+  .ticket-row { grid-template-columns: 1fr; gap: 2px; }
+  .ticket-total { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticket { animation: none; }
+  * { transition: none !important; }
+}

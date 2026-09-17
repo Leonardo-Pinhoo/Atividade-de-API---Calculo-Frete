@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Frete</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <span class="brand">Frete<span class="brand-dot">.</span>calc</span>
+      <span class="origin"><span class="origin-label">Origem</span> São Paulo – SP</span>
+    </header>
+
+    <main>
+      <section class="intro">
+        <h1>Calculadora de frete</h1>
+        <p>Consulte um CEP e veja o valor estimado do envio saindo de São Paulo.</p>
+      </section>
+
+      <form id="freight-form" class="freight-form" novalidate>
+        <label for="cep">CEP de destino</label>
+        <div class="field-row">
+          <input id="cep" name="cep" inputmode="numeric" maxlength="9" placeholder="00000-000" autocomplete="postal-code">
+          <button type="submit">Calcular frete</button>
+        </div>
+        <p id="message" class="message" role="alert"></p>
+      </form>
+
+      <section id="result" class="ticket" aria-live="polite" hidden>
+        <header class="ticket-head">
+          <h2>Resultado</h2>
+          <span class="ticket-tag">Estimativa</span>
+        </header>
+
+        <dl class="ticket-body">
+          <div class="ticket-row">
+            <dt>Localização</dt>
+            <dd id="location"></dd>
+          </div>
+          <div class="ticket-row">
+            <dt>Endereço</dt>
+            <dd id="address"></dd>
+          </div>
+          <div class="ticket-row">
+            <dt>CEP</dt>
+            <dd id="result-cep"></dd>
+          </div>
+        </dl>
+
+        <div class="ticket-total">
+          <span class="ticket-total-label">Frete estimado desde São Paulo</span>
+          <span id="freight" class="ticket-total-value"></span>
+        </div>
+
+        <small class="ticket-note">Valor estimado por região. O preço final pode variar conforme peso, dimensões e transportadora.</small>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <span>Dados de endereço via ViaCEP</span>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
